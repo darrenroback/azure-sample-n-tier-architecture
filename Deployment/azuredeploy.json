@@ -21,7 +21,7 @@
         "vnetName": "rad-demo-vnet",
         "vnetAddressPrefix": "10.255.176.0/26",
         "vnetResourceId": "[resourceId('Microsoft.Network/virtualNetworks', variables('vnetName'))]",
-        "webNSGName": "demo-web-nsg",
+        "webNSGName": "rad-demo-web-nsg",
         "webNSGResourceId": "[resourceId('Microsoft.Network/networkSecurityGroups', variables('webNSGName'))]",
         "webVMName": "rad-demo-web",
         "webVMNicName": "rad-demo-web-nic",
