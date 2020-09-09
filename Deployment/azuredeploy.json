@@ -11,34 +11,32 @@
         },
         "sqlServerName": {
             "type": "string",
-            "defaultValue": "[concat('demo-dbserver-', uniqueString(resourceGroup().id))]"
+            "defaultValue": "rad-demo-db-svr"
         }
     },
     "variables": {
         "deploymentUrl": "[deployment().properties.templateLink.uri]",
         "sqlServerResourceId": "[resourceId('Microsoft.Sql/servers', parameters('sqlServerName'))]",
-        "sqlServerDatabaseName": "demo-sqldb",
-        "vnetName": "demo-vnet",
-        "vnetAddressPrefix": "10.1.0.0/16",
+        "sqlServerDatabaseName": "rad-demo-db",
+        "vnetName": "rad-demo-vnet",
+        "vnetAddressPrefix": "10.255.176.0/26",
         "vnetResourceId": "[resourceId('Microsoft.Network/virtualNetworks', variables('vnetName'))]",
         "webNSGName": "demo-web-nsg",
         "webNSGResourceId": "[resourceId('Microsoft.Network/networkSecurityGroups', variables('webNSGName'))]",
-        "webVMName": "demo-web-vm",
-        "webVMNicName": "demo-web-vm-nic",
-        "webVMNicPIPName": "demo-web-vm-nic-pip",
-        "webSubnetName": "demo-web-subnet",
-        "webSubnetPrefix": "10.1.0.0/24",
-        "bizVMName": "demo-biz-vm",
-        "bizVMNicName": "demo-biz-vm-nic",
-        "bizNSGName": "demo-biz-nsg",
-        "bizSubnetName": "demo-biz-subnet",
-        "bizSubnetPrefix": "10.1.1.0/24",
+        "webVMName": "rad-demo-web",
+        "webVMNicName": "rad-demo-web-nic",
+        "webVMNicPIPName": "rad-demo-web-pip",
+        "demoSubnetName": "rad-demo-subnet",
+        "demoSubnetPrefix": "10.255.176.0/26",
+        "bizVMName": "rad-demo-app",
+        "bizVMNicName": "rad-demo-app-nic",
+        "bizNSGName": "rad-demo-app-nsg",
         "bizNSGResourceId": "[resourceId('Microsoft.Network/networkSecurityGroups', variables('bizNSGName'))]",
         "webVMNicResourceId": "[resourceId('Microsoft.Network/networkInterfaces', variables('webVMNicName'))]",
         "webVMNicPIPResourceId": "[resourceId('Microsoft.Network/publicIPAddresses', variables('webVMNicPIPName'))]",
-        "webSubnetResourceId": "[resourceId('Microsoft.Network/virtualNetworks/subnets', variables('vnetName'), variables('webSubnetName'))]",
+        "webSubnetResourceId": "[resourceId('Microsoft.Network/virtualNetworks/subnets', variables('vnetName'), variables('demoSubnetName'))]",
         "bizVMNicResourceId": "[resourceId('Microsoft.Network/networkInterfaces', variables('bizVMNicName'))]",
-        "bizSubnetResourceId": "[resourceId('Microsoft.Network/virtualNetworks/subnets', variables('vnetName'), variables('bizSubnetName'))]"
+        "bizSubnetResourceId": "[resourceId('Microsoft.Network/virtualNetworks/subnets', variables('vnetName'), variables('demoSubnetName'))]"
     },
     "resources": [
         {
@@ -175,15 +173,9 @@
                 },
                 "subnets": [
                     {
-                        "name": "[variables('webSubnetName')]",
+                        "name": "[variables('demoSubnetName')]",
                         "properties": {
-                            "addressPrefix": "[variables('webSubnetPrefix')]"
-                        }
-                    },
-                    {
-                        "name": "[variables('bizSubnetName')]",
-                        "properties": {
-                            "addressPrefix": "[variables('bizSubnetPrefix')]",
+                            "addressPrefix": "[variables('demoSubnetPrefix')]",
                             "serviceEndpoints": [
                                 {
                                     "service": "Microsoft.Sql",
