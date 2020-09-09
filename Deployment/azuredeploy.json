@@ -17,7 +17,7 @@
     "variables": {
         "deploymentUrl": "[deployment().properties.templateLink.uri]",
         "sqlServerResourceId": "[resourceId('Microsoft.Sql/servers', parameters('sqlServerName'))]",
-        "sqlServerDatabaseName": "rad-demo-db",
+        "sqlServerDatabaseName": "demo-sqldb",
         "vnetName": "rad-demo-vnet",
         "vnetAddressPrefix": "10.255.176.0/26",
         "vnetResourceId": "[resourceId('Microsoft.Network/virtualNetworks', variables('vnetName'))]",
